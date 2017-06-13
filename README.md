@@ -23,6 +23,7 @@ For more details, please refer to "Modality-dependent cross-media retrieval" and
 If this code is helpful for your research, please cite the following paper:
 
 @inproceedings{liu2017cross,
+
      author = {Ting Liu and
      Yao Zhao and         
      Shikui Wei and
