@@ -23,21 +23,13 @@ For more details, please refer to "Modality-dependent cross-media retrieval" and
 If this code is helpful for your research, please cite the following paper:
 
 @inproceedings{liu2017cross,
-
-  author = {Ting Liu and
-  
-  Yao Zhao and
-            
-  Shikui Wei and
-            
-  Yunchao Wei and
-            
-  Lixin Liao},
-            
-  title = {Enhanced isomorphic semantic representation for cross-media retrieval},
-  
-  booktitle = {IEEE International Conference on Multimedia and Expo(ICME)},
-  
-  year = {2017}
+     author = {Ting Liu and
+     Yao Zhao and         
+     Shikui Wei and
+     Yunchao Wei and
+     Lixin Liao},
+     title = {Enhanced isomorphic semantic representation for cross-media retrieval},
+     booktitle = {IEEE International Conference on Multimedia and Expo(ICME)},
+     year = {2017}
   
 }
