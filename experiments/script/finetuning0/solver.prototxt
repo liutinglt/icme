@@ -1,0 +1,15 @@
+net: "/home/amax/pascal_sentence/finetuning0/train_val_img.prototxt"
+test_iter: 8
+test_interval: 10  
+test_initialization:false
+base_lr: 0.001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 50
+display: 10 
+max_iter: 150
+momentum: 0.9
+weight_decay: 0.0005	
+snapshot: 150  
+snapshot_prefix: "/home/amax/pascal_sentence/model0/pascal_image"
+solver_mode: GPU

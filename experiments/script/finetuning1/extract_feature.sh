@@ -1,0 +1,1 @@
+/home/amax/caffe-master/build/tools/extract_features_binary /home/amax/pascal_sentence/model1/pascal_iter_300.caffemodel /home/amax/pascal_sentence/finetuning1/deploy.prototxt fc3_text,fc8_semantic /home/amax/pascal_sentence/feature/p1_text,/home/amax/pascal_sentence/feature/p1_image 400 GPU 

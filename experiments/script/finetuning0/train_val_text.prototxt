@@ -1,0 +1,178 @@
+name: "CaffeNet"  
+layer {
+  name: "data_text"
+  type: "BinData"
+  top: "data_text" 
+  include {
+    phase: TRAIN
+  }
+  bin_data_param {
+     batch_size:256
+     source:"/home/amax/data/pascal_sentence/train_text.bin" 
+  } 
+}
+layer {
+  name: "label_text"
+  type: "BinData"
+  top: "label_text" 
+  include {
+    phase: TRAIN
+  }
+  bin_data_param {
+     batch_size:256
+     source:"/home/amax/data/pascal_sentence/train_label.bin" 
+  } 
+}
+layer {
+  name: "data_text"
+  type: "BinData"
+  top: "data_text" 
+  include {
+    phase: TEST
+  }
+  bin_data_param {
+     batch_size:50
+     source:"/home/amax/data/pascal_sentence/test_text.bin" 
+  } 
+}
+layer {
+  name: "label_text"
+  type: "BinData"
+  top: "label_text" 
+  include {
+    phase: TEST
+  }
+  bin_data_param {
+     batch_size:50
+     source:"/home/amax/data/pascal_sentence/test_label.bin" 
+  } 
+} 
+layer {
+  name: "fc1_text"
+  type: "InnerProduct"
+  bottom: "data_text"
+  top: "fc1_text"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output:4096
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "fc1_text"
+  top: "fc1_text"
+}
+layer {
+  name: "drop1"
+  type: "Dropout"
+  bottom: "fc1_text"
+  top: "fc1_text"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+} 
+layer {
+  name: "fc2_text"
+  type: "InnerProduct"
+  bottom: "fc1_text"
+  top: "fc2_text"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output:128
+    weight_filler {
+      type: "gaussian"
+      std: 0.005
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+    }
+  }
+}
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "fc2_text"
+  top: "fc2_text"
+}
+layer {
+  name: "drop2"
+  type: "Dropout"
+  bottom: "fc2_text"
+  top: "fc2_text"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}  
+layer {
+  name: "fc3_text"
+  type: "InnerProduct"
+  bottom: "fc2_text"
+  top: "fc3_text"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+  }
+  inner_product_param {
+    num_output:20
+    weight_filler {
+       type: "gaussian"
+       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+    }
+  }
+} 
+layer{
+ name:"softmax"
+ type:"Softmax"
+ bottom:"fc3_text"
+ top:"fc3_text"
+} 
+layer {
+  name: "accuracy"
+  type: "MultiAccuracy"
+  bottom: "fc3_text"
+  bottom: "label_text"
+  top: "accuracy"
+  include {
+    phase: TEST
+  }
+}
+layer {
+  name: "loss_text"
+  type: "EuclideanLoss"
+  bottom: "fc3_text"
+  bottom: "label_text"
+  top: "loss_text"
+}
+
